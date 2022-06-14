@@ -1,0 +1,40 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy .NET Core Web Application on IIS Server
+
+
+on:
+  push:
+    branches: ["master"]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repo
+        uses: actions/checkout@v3
+
+      - name: Install DotNet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.300'
+      
+      - name: Verify the .Net Installation
+        run: dotnet --version
+        
+      - name: Build the Application with .NET
+        run: dotnet build --configuration Release
+      
+      - name: Publish the Deployment in public folder
+        run: dotnet publish -c Release -o public
+        
+      - name:  Create a Artifact using from the public folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: public-folder-to-be-deployed-to-iis
+          path: public
+
+
+     
