@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: Windows-Intel-d
+    runs-on: self-hosted
     steps:
       - name: Checkout the Repo
         uses: actions/checkout@v3
