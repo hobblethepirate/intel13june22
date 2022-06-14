@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Windows-Intel-d
     steps:
       - name: Checkout the Repo
         uses: actions/checkout@v3
@@ -35,6 +35,10 @@ jobs:
         with:
           name: public-folder-to-be-deployed-to-iis
           path: public
+          
+      - name: Copy the Files from Work Dir to IIS Directory
+        run: dir
+        
 
 
      
